@@ -1,0 +1,37 @@
+1. RMI_Prime
+
+javac *.java
+rmic PrimeRemote
+rmiregistry 5000
+start MyServer
+Start MyClient
+
+2. Corba_Calculator
+
+idlj -fall Calc.idl
+javac *.java CalcApp/*.java
+orbd -ORBInitialPort 1050&
+java StartServer -ORBIntialPort 1050 -ORBInitialHost localhost&
+java StartClient -ORBIntialPort 1050 -ORBInitialHost localhost
+
+3. Mpi_Sum
+
+mpicc Sum.c -o sum
+mpirun -np 4 ./sum
+
+4. Berkeley_Clock
+
+javac *.java
+java berkeleyy
+
+5. Tokenring
+
+javac *.java
+java tokenring
+
+6. Bully_algo
+
+javac *.java
+java BullyAlgorithm
+
+7. web services
