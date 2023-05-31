@@ -1,1 +1,102 @@
 
+import java.util.Scanner;
+
+public class RingAlgorithm {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of nodes: ");
+
+        int numNodes = scanner.nextInt();
+
+        scanner.nextLine();
+
+        // Create an array to store the status of each node
+
+        boolean[] nodeStatus = new boolean[numNodes];
+
+        // Get user input for the failed node
+
+        System.out.print("Enter the failed node (0-" + (numNodes - 1) + "): ");
+
+        int failedNode = scanner.nextInt();
+
+        scanner.nextLine();
+
+        // Get user input for the priority number
+
+        System.out.print("Enter the priority number: ");
+
+        int priorityNumber = scanner.nextInt();
+
+        scanner.nextLine();
+
+        // Initialize the node status
+
+        for (int i = 0; i < numNodes; i++) {
+
+            nodeStatus[i] = true;
+
+        }
+
+        nodeStatus[failedNode] = false;
+
+        // Start the ring algorithm
+
+        int current = 0;
+
+        while (true) {
+
+            // If current node is the failed node, skip it
+
+            if (current == failedNode) {
+
+                current = (current + 1) % numNodes;
+
+                continue;
+
+            }
+
+            // Process the current node
+
+            System.out.print("Node " + current + " is running. Enter a message (or 'exit' to quit): ");
+
+            String message = scanner.nextLine();
+
+            // Check if the message is 'exit'
+
+            if (message.equalsIgnoreCase("exit")) {
+
+                break;
+
+            }
+
+            // Check if the message's priority number is higher than the current node's priority number
+
+            int messagePriority = Integer.parseInt(message);
+
+            if (messagePriority > priorityNumber) {
+
+                System.out.println("Message with priority " + messagePriority + " dropped by node " + current);
+
+            } else {
+
+                System.out.println("Message with priority " + messagePriority + " received by node " + current);
+
+            }
+
+            // Move to the next node in the ring
+
+            current = (current + 1) % numNodes;
+
+        }
+
+        // Close the scanner
+
+        scanner.close();
+
+    }
+
+}
